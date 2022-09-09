@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>StudyCorp Espace Vendeurs</title>
+<link rel="icon" href="images/logo.png" />
+<link rel="stylesheet" href="css/blacklist/vendor.bundle.base.css">
+<link rel="stylesheet" href="css/blacklist/jquery-jvectormap.css">
+<link rel="stylesheet" href="css/blacklist/flag-icon.min.css">
+<link rel="stylesheet" href="css/blacklist/owl.carousel.min.css">
+<link rel="stylesheet" href="css/blacklist/owl.theme.default.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link href="css/blacklist/nucleo-icons.css" rel="stylesheet" />
+<link href="css/blacklist/nucleo-svg.css" rel="stylesheet" />
+<link rel="stylesheet" href="css/blacklist/style.css">
+<link rel="stylesheet" href="css/home.css">
+<link href="css/sidebar.css" rel="stylesheet" />
+
+<link rel="shortcut icon" href="images/logo.png" />
+</head>
+<style>
+  
+    #durba_list #durba_titre {
+        text-align: center;
+        font-weight: bold;
+        font-size: 25px;
+        font-style: italic;
+    }
+    #durba_list #durba_content img {
+        width:20px;
+        height:20px;margin-right:3px;
+    }
+    #durba_list #durba_content {
+        padding: 10px;
+        border: 5px solid black;
+        overflow: auto;
+        height:600px;
+        background: #373d50;
+        margin-top: 10px;
+    }
+    #durba_list #durba_content a {color:black; text-decoration:none;}
+    #durba_list #durba_content a:hover {color:grey; text-decoration:underline;}
+    #durba_list {
+        width: 23%;
+        padding: 20px;
+        float:left;
+    }
+    
+    #durba_contenu #durba_titre {
+        text-align: center;
+        font-weight: bold;
+        font-size: 25px;
+        font-style: italic;
+    }
+    #durba_contenu #durba_page {
+        padding: 10px;
+        width:900px;
+        overflow: auto;
+        height:600px;
+        border: 5px solid black;
+        background: #373d50;
+        margin-top: 10px;
+    }
+    #durba_contenu {
+        width: 70%;
+        padding: 20px;
+        float:right;
+    }
+    </style>
+
+<body>
+    <div id="wrapper">
+        
+      
+        <aside id="sidebar-wrapper">
+          <ul class="sidebar-nav">
+            <li>
+              <div class="count-indicator">
+                <img class="img-xs rounded-circle " src='<%=avatar%>' alt=""><br>
+                <p style="color:white">Bonjour <br style="line-height:22px;"> <%= username %> ! </p>
+  
+                </div>
+            </li>
+    
+  
+            <li class="nav-item menu-items">
+              <a class="nav-link" href="/blacklist">
+              <span class="menu-icon">
+              <i class="fa fa-bug"></i>
+              </span>
+              <span class="menu-title">Blacklist</span>
+              </a>
+              </li>
+              
+              <li class="active">
+              <a class="nav-link" href="/ticket">
+              <span class="menu-icon">
+              <i class="fa fa-comment"></i>
+              </span>
+              <span class="menu-title">Archives tickets</span>
+              </a>
+              </li>
+              <hr>
+              <li class="nav-item menu-items">
+                <a class="nav-link" href="/profile">
+                <span class="menu-icon">
+                <i class="fa fa-user"></i>
+                </span>
+                <span class="menu-title">Votre profil</span>
+                </a>
+                </li>
+  
+                <%if(discordId = 251698679059054593){%>
+                  <hr>
+                  <li class="nav-item menu-items">
+                    <a class="nav-link" href="/admin">
+                    <span class="menu-icon">
+                    <i class="fa fa-user"></i>
+                    </span>
+                    <span class="menu-title">Administration</span>
+                    </a>
+                    </li>
+                    <%}%>
+      
+      
+              </ul>
+        </aside>
+  
+  
+  
+  <div class="main-panel">
+  
+  <div class="content-wrapper">
+      <a href="#" class="navbar-brand" id="sidebar-toggle"><i class="fa fa-bars"></i></a>
+  
+  <div class="row">
+<div class="col-lg-12 grid-margin stretch-card">
+<div class="card">
+<div class="card-body">
+<h4 class="card-title">Liste de vos tickets</h4>
+<p class="card-description"></p>
+<div id="durba_list">
+	<div id="durba_content">  
+        <%tickets.forEach(ticket => {%> 
+            <button onclick="myFunction('<%=ticket.idticket%>')" id="<%=ticket.idticket%>" style="width: 98%; background-color: transparent; color: white; border: none;">
+                <img class="img-xs rounded-circle" src='https://cdn.discordapp.com/avatars/<%=ticket.userId%>/<%=ticket.avatar%>.png' alt="">
+                Ticket de <%= ticket.pseudo %><br><%= new Date(ticket.timestamp).toLocaleDateString();%>
+
+            </button>
+            <%})%>
+    </div>
+</div>
+<div id="durba_contenu">
+<div id="durba_page">
+    <%ticketmessages.forEach(ticketmessages => {%> 
+        <p>ID : <%=ticketmessages.idticket%> <br>Pseudo : <%=ticketmessages.userPseudo%><br>Message : <%=ticketmessages.content%></p>
+        <%})%>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<footer class="footer">
+<div class="d-sm-flex justify-content-center justify-content-sm-between">
+<span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © StudyCorp 2021 - 2022</span>
+</div>
+</footer>
+</div>
+</div>
+</div>
+</body>
+<script>
+    function myFunction(tid){
+     alert(`Id du ticket ${tid} !`)
+     return tid;
+     var tid = this.tid;
+    }
+</script>
+<script>
+    const $button  = document.querySelector('#sidebar-toggle');
+   const $wrapper = document.querySelector('#wrapper');
+   
+   $button.addEventListener('click', (e) => {
+     e.preventDefault();
+     $wrapper.classList.toggle('toggled');
+   });
+   </script>
+</html>
